@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+
+    <!-- Activates scanning of @Repository and @Service -->
+	<!-- register service/persistence beans in root context -->
+  	<context:component-scan base-package="com.abc.andrew.service" />
+
+    <!-- Add new DAOs here -->
+
+    <!-- DataSource -->
+	<!--rg.apache.commons.dbcp.BasicDataSource-->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="dataSource">
+		<property name="driverClassName" value="org.postgresql.Driver"/>
+		<property name="url" value="jdbc:postgresql://localhost:5432/andrewdb"/>
+		<property name="username" value="postgres"/>
+		<property name="password" value="12345678@X"/>
+ 	</bean>
+
+	<!--&lt;!&ndash; Hibernate SessionFactory &ndash;&gt;-->
+	<!--<bean id="hibernate4AnnotatedSessionFactory"-->
+		<!--class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
+		<!--<property name="dataSource" ref="dataSource"/>-->
+		<!--<property name="packagesToScan" value="com.abc.andrew.model"/>-->
+
+		<!--&lt;!&ndash;<property name="annotatedClasses">&ndash;&gt;-->
+			<!--&lt;!&ndash;<list>&ndash;&gt;-->
+				<!--&lt;!&ndash;<value>com.abc.andrew.model.Author</value>&ndash;&gt;-->
+			<!--&lt;!&ndash;</list>&ndash;&gt;-->
+		<!--&lt;!&ndash;</property>&ndash;&gt;-->
+
+		<!--<property name="hibernateProperties">-->
+			<!--<props>-->
+				<!--<prop key="hibernate.dialect">org.hibernate.dialect.Dialect</prop> &lt;!&ndash;org.hibernate.dialect.PostgreSQL82Dialect or org.hibernate.dialect.Dialect &ndash;&gt;-->
+				<!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+				<!--<prop key="hibernate.format_sql">true</prop>-->
+				<!--<prop key="hibernate.show_sql">true</prop>-->
+			<!--</props>-->
+		<!--</property>-->
+	<!--</bean>-->
+
+
+
+	<!--&lt;!&ndash; Hibernate Transaction Manager  &ndash;&gt;-->
+	<!--<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+		<!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>-->
+	<!--</bean>-->
+
+	<!--<bean id="authorDAO" class="com.abc.andrew.dao.AuthorDAOImpl">-->
+		<!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />-->
+	<!--</bean>-->
+	<!--<bean id="bookDAO" class="com.abc.andrew.dao.BookDAOImpl">-->
+		<!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />-->
+	<!--</bean>-->
+
+	<!--<bean id="authorService" class="com.abc.andrew.service.AuthorServiceImpl">-->
+		<!--<property name="authorDAO" ref="authorDAO"/>-->
+	<!--</bean>-->
+	<!--<bean id="bookService" class="com.abc.andrew.service.BookServiceImpl">-->
+		<!--<property name="bookDAO" ref="bookDAO"/>-->
+	<!--</bean>-->
+
+
+	<!--<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+		<!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />-->
+	<!--</bean>-->
+
+	<!--&lt;!&ndash; Transaction &ndash;&gt;-->
+	<!--<bean id="transactionManager"-->
+		<!--class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+		<!--<property name="sessionFactory" ref="sessionFactory" />-->
+	<!--</bean>-->
+
+</beans>
